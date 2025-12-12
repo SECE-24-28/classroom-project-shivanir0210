@@ -1,0 +1,290 @@
+Microsoft Windows [Version 10.0.26200.7171]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\shiva>momgosh
+'momgosh' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\shiva>mongosh
+Current Mongosh Log ID: 6939361d3eb65002f56c4bcf
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.5.1
+Using MongoDB:          8.2.2
+Using Mongosh:          2.5.1
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2025-12-01T12:06:42.265+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> show dbs
+admin   40.00 KiB
+config  60.00 KiB
+local   40.00 KiB
+test> use admin
+switched to db admin
+admin> show collection
+MongoshInvalidInputError: [COMMON-10001] 'collection' is not a valid argument for "show".
+admin> show collections
+system.version
+admin> use employee
+switched to db employee
+employee> db.employee.insertOne({"name":"shiva","gender":"female"})
+{
+  acknowledged: true,
+  insertedId: ObjectId('693938e63eb65002f56c4bd0')
+}
+employee> db.employee.insertOne({"name":"aswin","gender":"male"})
+{
+  acknowledged: true,
+  insertedId: ObjectId('6939391c3eb65002f56c4bd1')
+}
+employee> db.employee.find()
+[
+  {
+    _id: ObjectId('693938e63eb65002f56c4bd0'),
+    name: 'shiva',
+    gender: 'female'
+  },
+  {
+    _id: ObjectId('6939391c3eb65002f56c4bd1'),
+    name: 'aswin',
+    gender: 'male'
+  }
+]
+employee> db.employee.updateOne({},{$rename:{"name":"Name"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+employee> db.employee.find()
+[
+  {
+    _id: ObjectId('693938e63eb65002f56c4bd0'),
+    gender: 'female',
+    Name: 'shiva'
+  },
+  {
+    _id: ObjectId('6939391c3eb65002f56c4bd1'),
+    name: 'aswin',
+    gender: 'male'
+  }
+]
+employee> db.employee.updateOne({},{$rename:{"name":"Name"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+employee> db.employee.find()
+[
+  {
+    _id: ObjectId('693938e63eb65002f56c4bd0'),
+    gender: 'female',
+    Name: 'shiva'
+  },
+  {
+    _id: ObjectId('6939391c3eb65002f56c4bd1'),
+    name: 'aswin',
+    gender: 'male'
+  }
+]
+employee> db.employee.updateMany({},{$rename:{"name":"Name"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 2,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+employee>  db.employee.find()
+[
+  {
+    _id: ObjectId('693938e63eb65002f56c4bd0'),
+    gender: 'female',
+    Name: 'shiva'
+  },
+  {
+    _id: ObjectId('6939391c3eb65002f56c4bd1'),
+    gender: 'male',
+    Name: 'aswin'
+  }
+]
+employee>  db.employee.find()
+[
+  {
+    _id: ObjectId('693938e63eb65002f56c4bd0'),
+    gender: 'female',
+    Name: 'shiva'
+  },
+  {
+    _id: ObjectId('6939391c3eb65002f56c4bd1'),
+    gender: 'male',
+    Name: 'aswin'
+  }
+]
+employee> db.employee.updateMany({},{$set:{"age":19}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 2,
+  modifiedCount: 2,
+  upsertedCount: 0
+}
+employee> db.employee.find()
+[
+  {
+    _id: ObjectId('693938e63eb65002f56c4bd0'),
+    gender: 'female',
+    Name: 'shiva',
+    age: 19
+  },
+  {
+    _id: ObjectId('6939391c3eb65002f56c4bd1'),
+    gender: 'male',
+    Name: 'aswin',
+    age: 19
+  }
+]
+employee> db.employee.find({"name":"aswin"})
+
+employee> db.employee.findOne({"name":"aswin"})
+null
+employee> db.employee.findOne({"Name":"aswin"})
+{
+  _id: ObjectId('6939391c3eb65002f56c4bd1'),
+  gender: 'male',
+  Name: 'aswin',
+  age: 19
+}
+employee> db.employee.insertOne({"Name":"mani","gender":"male"})
+{
+  acknowledged: true,
+  insertedId: ObjectId('693941843eb65002f56c4bd2')
+}
+employee> db.employee.find()
+[
+  {
+    _id: ObjectId('693938e63eb65002f56c4bd0'),
+    gender: 'female',
+    Name: 'shiva',
+    age: 19
+  },
+  {
+    _id: ObjectId('6939391c3eb65002f56c4bd1'),
+    gender: 'male',
+    Name: 'aswin',
+    age: 19
+  },
+  {
+    _id: ObjectId('693941843eb65002f56c4bd2'),
+    Name: 'mani',
+    gender: 'male'
+  }
+]
+employee> db.employee.deleteOne({_id: ObjectId('693941843eb65002f56c4bd2')})
+{ acknowledged: true, deletedCount: 1 }
+employee> db.employee.find()
+[
+  {
+    _id: ObjectId('693938e63eb65002f56c4bd0'),
+    gender: 'female',
+    Name: 'shiva',
+    age: 19
+  },
+  {
+    _id: ObjectId('6939391c3eb65002f56c4bd1'),
+    gender: 'male',
+    Name: 'aswin',
+    age: 19
+  }
+]
+employee> db.employee.insertOne({"Name":"sasiabi","gender":"male"})
+{
+  acknowledged: true,
+  insertedId: ObjectId('693943ba3eb65002f56c4bd3')
+}
+employee> db.employee.insertOne({"Name":"rithan","gender":"male"})
+{
+  acknowledged: true,
+  insertedId: ObjectId('693943cd3eb65002f56c4bd4')
+}
+employee> db.employee.toArray()
+TypeError: db.employee.toArray is not a function
+employee> db.employee.find().toArray()
+[
+  {
+    _id: ObjectId('693938e63eb65002f56c4bd0'),
+    gender: 'female',
+    Name: 'shiva',
+    age: 19
+  },
+  {
+    _id: ObjectId('6939391c3eb65002f56c4bd1'),
+    gender: 'male',
+    Name: 'aswin',
+    age: 19
+  },
+  {
+    _id: ObjectId('693943ba3eb65002f56c4bd3'),
+    Name: 'sasiabi',
+    gender: 'male'
+  },
+  {
+    _id: ObjectId('693943cd3eb65002f56c4bd4'),
+    Name: 'rithan',
+    gender: 'male'
+  }
+]
+employee> db.employee.find().forEach((data)=>print("the result:",data))
+the result: {
+  _id: ObjectId('693938e63eb65002f56c4bd0'),
+  gender: 'female',
+  Name: 'shiva',
+  age: 19
+}
+the result: {
+  _id: ObjectId('6939391c3eb65002f56c4bd1'),
+  gender: 'male',
+  Name: 'aswin',
+  age: 19
+}
+the result: {
+  _id: ObjectId('693943ba3eb65002f56c4bd3'),
+  Name: 'sasiabi',
+  gender: 'male'
+}
+the result: {
+  _id: ObjectId('693943cd3eb65002f56c4bd4'),
+  Name: 'rithan',
+  gender: 'male'
+}
+
+employee> db.employee.find({},{"name":1})
+[
+  { _id: ObjectId('693938e63eb65002f56c4bd0') },
+  { _id: ObjectId('6939391c3eb65002f56c4bd1') },
+  { _id: ObjectId('693943ba3eb65002f56c4bd3') },
+  { _id: ObjectId('693943cd3eb65002f56c4bd4') }
+]
+employee>  db.employee.find({},{"Name":true})
+[
+  { _id: ObjectId('693938e63eb65002f56c4bd0'), Name: 'shiva' },
+  { _id: ObjectId('6939391c3eb65002f56c4bd1'), Name: 'aswin' },
+  { _id: ObjectId('693943ba3eb65002f56c4bd3'), Name: 'sasiabi' },
+  { _id: ObjectId('693943cd3eb65002f56c4bd4'), Name: 'rithan' }
+]
+employee>  db.employee.find({},{"Name":1,_id:false})
+[
+  { Name: 'shiva' },
+  { Name: 'aswin' },
+  { Name: 'sasiabi' },
+  { Name: 'rithan' }
+]
+employee>
