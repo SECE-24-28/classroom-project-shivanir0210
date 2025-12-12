@@ -1,0 +1,12 @@
+let name="Demo";
+let var1=45;
+let var2=34.5;
+let var3=true;
+let var4=null;
+var a;
+console.log(typeof(name));
+console.log(var1);
+console.log(var2);
+console.log(var3);
+console.log(var4);
+console.log(a); 
