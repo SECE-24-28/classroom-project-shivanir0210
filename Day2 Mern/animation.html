@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<meta charset:utf-8>
+<head>
+<title>animate</title>
+<style >
+
+.main
+{
+width:80px;
+height:80px;
+background:red;
+animation:move 15s ease 0s 5 alternate;
+}
+@keyframes move
+{
+0%{transform:translateX(90px);}
+100%{transform:translateX(100px);}
+150%{transform:translateX(400px);}
+}
+</style>
+<body>
+<div class="main"></div>
+</body>
+</html>
